@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Sunshine</string>
+    <string name="about_text">New Activity</string>
+    <string name="about_title">About</string>
+</resources>
