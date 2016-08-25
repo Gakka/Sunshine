@@ -9,19 +9,22 @@ package com.example.android.sunshine.adapters;
     import android.view.LayoutInflater;
     import android.view.View;
     import android.view.ViewGroup;
+    import android.widget.ImageView;
     import android.widget.LinearLayout;
     import android.widget.TextView;
     import com.example.android.sunshine.models.Movie;
     import java.util.List;
     import com.example.android.sunshine.R;
+    import com.squareup.picasso.Picasso;
 
-    public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewHolder> {
+public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewHolder> {
 
         private List<Movie> movies;
         private int rowLayout;
         private Context context;
         private static  MovieClickListener movieClickListener;
-
+        public static final String base_url = "http://image.tmdb.org/t/p/w185";
+        String back = "";
 
         public static class MovieViewHolder extends RecyclerView.ViewHolder {
             LinearLayout moviesLayout;
@@ -29,6 +32,7 @@ package com.example.android.sunshine.adapters;
             TextView data;
             TextView movieDescription;
             TextView rating;
+            ImageView backdrop;
 
 
             public MovieViewHolder(View v) {
@@ -50,6 +54,8 @@ package com.example.android.sunshine.adapters;
                 data = (TextView) v.findViewById(R.id.subtitle);
                 movieDescription = (TextView) v.findViewById(R.id.description);
                 rating = (TextView) v.findViewById(R.id.rating);
+                backdrop = (ImageView) v.findViewById(R.id.backdrop_image_view);
+
             }
         }
 
@@ -74,6 +80,9 @@ package com.example.android.sunshine.adapters;
             holder.data.setText(movies.get(position).getReleaseDate());
             holder.movieDescription.setText(movies.get(position).getOverview());
             holder.rating.setText(movies.get(position).getVoteAverage().toString());
+            back =(movies.get(position).getBackdropPath().toString());
+            Picasso.with(context).load(base_url+back).into(holder.backdrop);
+
         }
 
         @Override
